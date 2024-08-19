@@ -1,0 +1,11 @@
+const { tokenVerify } = require('../auth/userAuth');
+const route = require('express').Router();
+const userController = require('../Controllers/userController')
+
+route.post("/regist", userController.Regis)
+route.post('/login', userController.Login)
+route.get('/', userController.Homepage)
+route.get('/private', tokenVerify, userController.Private)
+route.get('/Cadastro', userController.Cadastro)
+route.get('/find', userController.Find)
+module.exports = route

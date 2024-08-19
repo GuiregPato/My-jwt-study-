@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Usuários</title>
+</head>
+<body>
+  <h1>Lista de Usuários</h1>
+  <ul id="usuarios-list"></ul>
+
+  <script>
+    async function fetchUsuarios() {
+      try {
+        const response = await fetch('/find');
+        const usuarios = await response.json();
+
+        const usuariosList = document.getElementById('usuarios-list');
+        usuarios.forEach(User => {
+          const li = document.createElement('li');
+          li.textContent = `Nome: ${User.name}, Senha: ${User.pass}`;
+          usuariosList.appendChild(li);
+        });
+      } catch (error) {
+        console.error('Erro ao buscar usuários:', error);
+      }
+    }
+
+    fetchUsuarios();
+  </script>
+</body>
+</html>
